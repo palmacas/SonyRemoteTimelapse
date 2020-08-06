@@ -1,9 +1,11 @@
 /*
-   Remote control for Sony Camera
-   Based on ESP8266 microcontroller and Sony Remote Camera API
+   SonyRemoteTimelapse
+   
+   Remote control for a Sony camera using Sony Camera Remote API
+   
+   Creates an AccessPoint (AP) to setup camera's SSID and password, also the timelapse duration and shot period
 
-   Creates an AccessPoint to setup the camera's SSID and Password
-   Allows to define the timelapse span and shot period
+   https://palmacas.com/camara-sony-esp8266
 */
 
 #include <Arduino.h>
@@ -52,7 +54,6 @@ const char index_html[] PROGMEM = R"rawliteral(
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta content="Sony Camera Remote - Timelapse" name="description">
     <title>Sony Camera Remote - Timelapse</title>
     <style>
     body {
@@ -230,7 +231,7 @@ void loop()
         httpPost(actTakePicture);
         delay(shot_period_ms);
       }
-      op_mode = 4;      
+      op_mode = 4;
       Serial.println("Capture finished");
       httpPost(setAutoPowerOff);
       break;
