@@ -56,31 +56,13 @@ const char index_html[] PROGMEM = R"rawliteral(
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Sony Camera Remote - Timelapse</title>
     <style>
-    body {
-  background: #36393e;
-  color: #bfbfbf;
-  font-family: sans-serif;
-  margin-left: 10px; margin-right: 10px;
-  text-align: center;
-  }
+    body {background: #36393e; color: #bfbfbf; font-family: sans-serif; margin-left: 10px; margin-right: 10px; text-align: center;}
     h2 { font-size: 2.0rem; text-align: center; }
     p { font-size: 1.0rem; }
-    .labels {
-      font-size: 1.0rem;
-      vertical-align:middle;
-      padding-bottom: 15px;
-    }
-    a {
-    color: #5281bb;
-    text-decoration: none;
-    }
+    a {color: #bfbfbf; text-decoration: none;}
     input { font-size: 1.0rem; text-align: center}
     fieldset { display: block; margin-left: 10px; margin-right: 10px}
-    .labels {
-      font-size: 1.0rem;
-      vertical-align:middle;
-      padding-bottom: 15px
-    }
+    .labels {font-size: 1.0rem; vertical-align:middle; padding-bottom: 15px;}
     .button {background-color: #195B6A; border: none; color: white; padding: 16px 40px; text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}
     </style>
 </head>
@@ -101,9 +83,8 @@ const char index_html[] PROGMEM = R"rawliteral(
     <p>Once the parameters are saved the AP (Access Point) will be disabled and the ESP will try to connect to the camera. A negative edge on GPIO0 will start the capture.</p>
     <button class="button" data-translate="save" id="save" onclick="save">SAVE</button>
 </form>
-<p>Version 1.0<br>
-    © Copyright 2020 palmacas<br>
-    <a href="https://palmacas.com/" target="_blank">palmacas.com</a></p>
+<p>v1.0<br>
+    <a href="https://palmacas.com/" target="_blank">palmacas</a> 2020<br></p>
 </body>
 </html>)rawliteral";
 
@@ -116,33 +97,20 @@ const char save_html[] PROGMEM = R"rawliteral(
     <meta content="Sony Camera Remote - Timelapse" name="description">
     <title>Sony Camera Remote - Timelapse</title>
     <style>
-    body {
-  background: #36393e;
-  color: #bfbfbf;
-  font-family: sans-serif;
-  margin-left: 10px; margin-right: 10px;
-  text-align: center;
-  }
-    h2 { font-size: 2.0rem; text-align: center; }
-    p { font-size: 1.0rem; }
-    .labels {
-      font-size: 1.0rem;
-      vertical-align:middle;
-      padding-bottom: 15px;
-    }
-    a {
-    color: #5281bb;
-    text-decoration: none;
+    body {background: #36393e; color: #bfbfbf; font-family: sans-serif; margin-left: 10px; margin-right: 10px; text-align: center;}
+    h2 { font-size: 2.0rem; text-align: center;}
+    p { font-size: 1.0rem;}
+    a {color: #bfbfbf; text-decoration: none;}
+    .labels {font-size: 1.0rem; vertical-align:middle; padding-bottom: 15px;}
     }
     </style>
 </head>
 <body>
 <h2>Sony Camera Remote - Timelapse</h2>
-<p>Parameters saved succesfully!</p>
+<p>Parameters saved successfully!</p>
 <p>Once the ESP is connected to the camera, press the flash button (negative edge on GPIO0) to start the timelapse.</p>
-<p>Version 1.0<br>
-    © Copyright 2020 palmacas<br>
-    <a href="https://palmacas.com/" target="_blank">palmacas.com</a></p>
+<p>v1.0<br>
+    <a href="https://palmacas.com/" target="_blank">palmacas</a> 2020<br></p>
 </body>
 </html>)rawliteral";
 
@@ -178,10 +146,8 @@ void setup() {
   pinMode(start_button, INPUT_PULLUP);
 }
 
-void loop()
-{
-  switch (op_mode)
-  {
+void loop() {
+  switch (op_mode) {
     case 0:
       while (picture_number == 0) {
         server.handleClient();
@@ -266,13 +232,11 @@ void handleSave() {
   }
 }
 
-void httpPost(char* j_request)
-{
+void httpPost(char* j_request) {
   // Creates domain name
   String server_name = "http://" + host + ":" + http_port + url;
   // Check WiFi connection status
-  if (WiFi.status() == WL_CONNECTED)
-  {
+  if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
     // Domain name with IP, port and URL
     http.begin(server_name);
